@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+	<title>ROMAN-ARABIAN NUMERAL CONVERTER</title>
+	<link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>	
+	<div id="info">
+		<p>Roman-Arabian numeral converter.</p>
+		<p>
+			Put some number (roman, i.e. XII, or arabic, i.e. 14) in text field on the left side of page. Press 'Convert' to make conversion, result will be displayed in text field on the right side of page. Press 'Reset' to empty text fields.
+		</p>
+	</div>
+	<div id="content" align="center">	
+		<form id="form" action="/convert/" method = "get">
+			{% csrf_token %}
+			<input required placeholder="XII / 14" id="to_c" type="text" name="to_c">
+			<input id="button" type="submit" name="Convert" value="Convert">
+			<input id="button" type="button" name="Reset" value="Reset" onclick="location.href='/'">
+			<input placeholder="result here..." id="conv" type="text" name="conv" readonly >
+			<script>
+					var jsonObject = {{ json | safe }};
+					document.getElementById("to_c").value = jsonObject.to_c;
+					document.getElementById("conv").value = jsonObject.conv;
+			</script>
+		</form>
+	</div>
+	<div id="footer">
+		<p>
+			The Romans, as you know, used latin letters to write the numerals. It's believed that the Roman numeral system is a classic example of non-positional numeral system, in which the value (which denotes the numeral) doesn't depend on the position in the number. Here's numbers and corresponding letters:
+		</p>
+		<table>
+		   <tr><td>1</td><td>=</td><td>I</td></tr>
+		   <tr><td>5</td><td>=</td><td>V</td></tr>
+		   <tr><td>10</td><td>=</td><td>X</td></tr>
+		   <tr><td>50</td><td>=</td><td>L</td></tr>
+		   <tr><td>100</td><td>=</td><td>C</td></tr>
+		   <tr><td>500</td><td>=</td><td>D</td></tr>
+		   <tr><td>1000</td><td>=</td><td>M</td></tr>
+		</table> 
+		<p>
+			For example, the number 3 in the Roman numerial system will be denoted as III.
+			However, not everything is so simple, and it's not a completely non-positional numerial system,
+			because in the Roman numeral system there is an additional rule that affects the amount that
+			denotes a number, depending on its position. This rule prohibits the use of the same 
+			numbers more than 3 times in a row, so 3 is III, and 4 is IV, and I(1) is in front of V(5), denotes subtraction, so that 1 is actually equal to -1.
+		</p>	
+	</div>
+</body>
+</html>
