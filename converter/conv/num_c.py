@@ -1,19 +1,18 @@
 # Arabian to Roman convert method
 
 def arabian_to_roman(value):
-    if not 0 < value < 4000:
-        return 'Number must be 0<x<4000.'
+	if not 0 < value < 4000:
+		   return 'Number must be 0<x<4000.'
 
-    ints = (1000,900,500,400,100,90,50,40,10,9,5,4,1)
-    nums = ('M','CM','D','CD','C','XC','L','XL','X','IX','V','IV','I')
-    result = []
+	result = []
+	values={1000: 'M',900: 'CM',500:'D',400:'CD',100:'C',90:'XC',50:'L',40:'XL',10:'X',9:'IX',5:'V',4:'IV',1:'I'}
 
-    for i in range(len(ints)):
-        count = int(value / ints[i])
-        result.append(nums[i] * count)
-        value -= ints[i] * count
+	for arabic,roman in sorted(values.iteritems(),reverse=True):
+		count = int(value/arabic)
+		result.append(roman*count)
+		value-=arabic*count
 
-    return ''.join(result)
+	return ''.join(result)
 
 # Roman to Arabian convert method
 
